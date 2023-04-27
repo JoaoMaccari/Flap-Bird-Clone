@@ -7,6 +7,8 @@ public class Spawner : MonoBehaviour
     public GameObject pipe;
     public float spawnRate = 2;
     private float timer = 0;
+    public float heightOffset = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +28,18 @@ public class Spawner : MonoBehaviour
     }
 
     void spawnPipe() {
+
+        float lowestPoint = transform.position.y - heightOffset;
+        float highestPoint = transform.position.y + heightOffset;
+
         //o instantiate realiza o spawn de um objeto em cena
         //tenho que passar qual objeto quero instanciar e em qual posicao ele vai aparecer
-        Instantiate(pipe, transform.position, transform.rotation);
+        //Nesse caso vai instanciar o objeto sempre no mesmo lugar
+        //Instantiate(pipe, transform.position, transform.rotation);
+
+
+        //ao instanciar eu crio um novo vetor passando as posições onde deve spawnar no eixo X, usando de forma randomica
+        Instantiate(pipe, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
         
     }
 }

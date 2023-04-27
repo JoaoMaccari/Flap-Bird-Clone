@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class pipeScript : MonoBehaviour
 {
-    public float moveSpeed = 5;
+    public float moveSpeed = 3;
+    public float deadZone = -19;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +16,11 @@ public class pipeScript : MonoBehaviour
     void Update()
     {
         transform.position = transform.position + Vector3.left * moveSpeed * Time.deltaTime;
+
+        if (transform.position.x < deadZone) {
+            Debug.Log("Pipe deleted");
+            Destroy(gameObject);
+        }
+
     }
 }
